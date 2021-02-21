@@ -218,6 +218,10 @@ void _new_packet(attr_t attr, int lineno, int x, int len, const chtype *srcp)
             mapped_attr |= 0x0800; /* COMMON_LVB_GRID_LVERTICAL */
         if (attr & A_RIGHT)
             mapped_attr |= 0x1000; /* COMMON_LVB_GRID_RVERTICAL */
+        if (attr & A_LEAD)
+            mapped_attr |= 0x0100; /* COMMON_LVB_LEADING_BYTE */
+        if (attr & A_TRAIL)
+            mapped_attr |= 0x0200; /* COMMON_LVB_TRAILING_BYTE */
 
         for (j = 0; j < len; j++)
         {

@@ -2,6 +2,8 @@
 
 #include <curspriv.h>
 
+extern int wcwidth(wchar_t ucs);
+
 /*man-start**************************************************************
 
 addch
@@ -115,6 +117,19 @@ int waddch(WINDOW *win, const chtype ch)
     int x, y;
     chtype text, attr;
     bool xlat;
+
+    if ((ch & A_CHARTEXT) >= 0x100) {
+        if (!(ch & (A_LEAD|A_TRAIL))) {
+            int width = wcwidth(ch & A_CHARTEXT);
+            if (width == 2) {
+                int ret = waddch(win, ch | A_LEAD);
+                if (ret == OK) {
+                    ret = waddch(win, ch | A_TRAIL);
+                }
+                return ret;
+            }
+        }
+    }
 
     PDC_LOG(("waddch() - called: win=%p ch=%x (text=%c attr=0x%x)\n",
              win, ch, ch & A_CHARTEXT, ch & A_ATTRIBUTES));

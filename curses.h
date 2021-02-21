@@ -31,7 +31,7 @@ Defined by this header:
 #define PDC_BUILD    3905
 #define PDC_VER_MAJOR   3
 #define PDC_VER_MINOR   9
-#define PDC_VERDOT   "3.9"
+#define PDC_VERDOT   "3.9-g1"
 
 #define CHTYPE_LONG     1      /* chtype >= 32 bits */
 
@@ -427,9 +427,9 @@ indicator.
 #define A_ALTCHARSET  (chtype)0x00010000
 #define A_RIGHT       (chtype)0x00020000
 #define A_LEFT        (chtype)0x00040000
-#define A_ITALIC      (chtype)0x00080000
+#define A_TRAIL       (chtype)0x00080000
 #define A_UNDERLINE   (chtype)0x00100000
-#define A_REVERSE     (chtype)0x00200000
+#define A_LEAD        (chtype)0x00200000
 #define A_BLINK       (chtype)0x00400000
 #define A_BOLD        (chtype)0x00800000
 
@@ -442,6 +442,9 @@ indicator.
 #define A_LEFTLINE    A_LEFT
 #define A_RIGHTLINE   A_RIGHT
 #define A_STANDOUT    (A_REVERSE | A_BOLD) /* X/Open */
+
+#define A_ITALIC      A_NORMAL
+#define A_REVERSE     A_NORMAL
 
 #define A_DIM         A_NORMAL
 #define A_INVIS       A_NORMAL

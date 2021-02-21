@@ -1,0 +1,9 @@
+modified 3.9-g1
+
+- Fixed the display of wide characters only in the Windows version.
+  They are no longer available because I used the A_REVERSE and
+  A_ITALIC modifier bits for this fix.
+
+
+
+[EOF]
