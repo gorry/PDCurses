@@ -1,3 +1,9 @@
+modified 3.9-g2
+
+- Fixed display one character twice in some cases.
+- Add some wide characters (often used in Japanese) to wcwidth map.
+
+
 modified 3.9-g1
 
 - Fixed the display of wide characters only in the Windows version.

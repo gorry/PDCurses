@@ -176,6 +176,7 @@ void _new_packet(attr_t attr, int lineno, int x, int len, const chtype *srcp)
 #else
         char buffer[512];
 #endif
+        int jx = 0;
         for (j = 0; j < len; j++)
         {
             chtype ch = srcp[j];
@@ -186,15 +187,16 @@ void _new_packet(attr_t attr, int lineno, int x, int len, const chtype *srcp)
             if (blink && blinked_off)
                 ch = ' ';
 
-            buffer[j] = ch & A_CHARTEXT;
+            if (!(ch & A_TRAIL))
+                buffer[jx++] = ch & A_CHARTEXT;
         }
 
         PDC_gotoyx(lineno, x);
         _set_ansi_color(fore, back, attr);
 #ifdef PDC_WIDE
-        WriteConsoleW(pdc_con_out, buffer, len, NULL, NULL);
+        WriteConsoleW(pdc_con_out, buffer, jx, NULL, NULL);
 #else
-        WriteConsoleA(pdc_con_out, buffer, len, NULL, NULL);
+        WriteConsoleA(pdc_con_out, buffer, jx, NULL, NULL);
 #endif
     }
     else
